@@ -1,0 +1,5 @@
+# Packages needed by CodePraise to be installed on Heroku
+#
+# Ensure that apt package manager is available on Heroku
+# e.g., heroku buildpacks:add --index 1 heroku-community/apt
+git
