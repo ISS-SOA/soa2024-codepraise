@@ -1,0 +1,8 @@
+# Packages needed by CodePraise to be installed on Heroku
+#
+# Ensure that apt package manager is available on Heroku
+# e.g. for Heroku:
+# - add apt buildpack: heroku buildpacks:add --index 1 heroku-community/apt
+# - set env var: GIT_EXEC_PATH=/app/.apt/usr/lib/git-core
+#   see: https://github.com/heroku/heroku-buildpack-apt/issues/137
+git

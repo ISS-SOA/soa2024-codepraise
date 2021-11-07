@@ -66,13 +66,13 @@ module CodePraise
         end
 
         def call
-          owner = Members.db_find_or_create(@entity.owner)
+          owner = Members.find_or_create(@entity.owner)
 
           create_project.tap do |db_project|
             db_project.update(owner:)
 
             @entity.contributors.each do |contributor|
-              db_project.add_contributor(Members.db_find_or_create(contributor))
+              db_project.add_contributor(Members.find_or_create(contributor))
             end
           end
         end

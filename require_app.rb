@@ -6,7 +6,7 @@
 # Usage:
 #  require_app
 #  require_app(%w[infrastructure models])
-def require_app(folders = %w[models infrastructure views controllers])
+def require_app(folders = %w[domain infrastructure views controllers])
   app_list = Array(folders).map { |folder| "app/#{folder}" }
   full_list = ['config', app_list].flatten.join(',')
 
