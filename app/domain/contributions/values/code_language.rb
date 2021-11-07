@@ -95,7 +95,7 @@ module CodePraise
       UNKNOWN_LANGUAGE = CodeLanguage::Unknown.freeze
 
       def self.extension_language(file_extension)
-        (LANGUAGE_EXTENSION[file_extension] || UNKNOWN_LANGUAGE)
+        LANGUAGE_EXTENSION[file_extension] || UNKNOWN_LANGUAGE
       end
     end
   end

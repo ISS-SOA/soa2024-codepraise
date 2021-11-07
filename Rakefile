@@ -7,25 +7,54 @@ task :default do
   puts `rake -T`
 end
 
-desc 'Run tests once'
-Rake::TestTask.new(:spec) do |t|
-  t.pattern = 'spec/*_spec.rb'
-  t.warning = false
+desc 'Run the unit and integration tests'
+task spec: ['spec:default']
+
+namespace :spec do
+  desc 'Run unit and integration tests'
+  Rake::TestTask.new(:default) do |t|
+    t.pattern = 'spec/tests/{integration,unit}/**/*_spec.rb'
+    t.warning = false
+  end
+
+  desc 'Run acceptance tests'
+  task :acceptance do
+    puts 'NOTE: run app in test environment in another process'
+    sh 'ruby spec/tests/acceptance/acceptance_spec.rb'
+  end
 end
 
-desc 'Keep rerunning tests upon changes'
+desc 'Keep rerunning unit/integration tests upon changes'
 task :respec do
   sh "rerun -c 'rake spec' --ignore 'coverage/*' --ignore 'repostore/*'"
 end
 
-desc 'Run web app'
-task :run do
-  sh 'bundle exec puma'
+desc 'Run web app in default mode'
+task run: ['run:default']
+
+namespace :run do
+  desc 'Run web app in development or production'
+  task :default do
+    sh 'bundle exec puma'
+  end
+
+  desc 'Run web app for acceptance tests'
+  task :test do
+    sh 'RACK_ENV=test puma -p 9000'
+  end
 end
 
 desc 'Keep rerunning web app upon changes'
 task :rerun do
   sh "rerun -c --ignore 'coverage/*' --ignore 'repostore/*' -- bundle exec puma"
+end
+
+desc 'Generates a 64 by secret for Rack::Session'
+task :new_session_secret do
+  require 'base64'
+  require 'SecureRandom'
+  secret = SecureRandom.random_bytes(64).then { Base64.urlsafe_encode64(_1) }
+  puts "SESSION_SECRET: #{secret}"
 end
 
 namespace :db do

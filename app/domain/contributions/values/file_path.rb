@@ -12,7 +12,7 @@ module CodePraise
       attr_reader :directory, :filename
 
       def initialize(filepath)
-        super(filepath)
+        super
         parse_path
       end
 
