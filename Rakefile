@@ -17,10 +17,17 @@ namespace :spec do
     t.warning = false
   end
 
+  # NOTE: make sure you have run `rake run:test` in another process
   desc 'Run acceptance tests'
-  task :acceptance do
-    puts 'NOTE: run app in test environment in another process'
-    sh 'ruby spec/tests/acceptance/acceptance_spec.rb'
+  Rake::TestTask.new(:acceptance) do |t|
+    t.pattern = 'spec/tests/acceptance/*_spec.rb'
+    t.warning = false
+  end
+
+  desc 'Run unit, integration, and acceptance tests'
+  Rake::TestTask.new(:all) do |t|
+    t.pattern = 'spec/tests/**/*_spec.rb'
+    t.warning = false
   end
 end
 
