@@ -30,6 +30,8 @@ We hope this tool will give instructors a fair sense of how well students have c
 - Copy `config/secrets_example.yml` to `config/secrets.yml` and update token
 - Ensure correct version of Ruby install (see `.ruby-version` for `rbenv`)
 - Run `bundle install`
+- Rub `bundle exec rake db:migrate` to create dev database
+- Rub `RACK_ENV=test bundle exec rake db:migrate` to create test database
 
 ## Running tests
 
