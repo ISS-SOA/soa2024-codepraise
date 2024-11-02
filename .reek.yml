@@ -3,8 +3,8 @@
     IrresponsibleModule:
       enabled: false
   exclude_paths:
-    - _snippets
-    - spec/fixtures/project_info.rb # one-time test fixture creator
-    # configuration and helper files do not need to be considered
-    - spec/helpers/database_helper.rb
-    - spec/helpers/vcr_helper.rb
+    - _snippets                         # demo files ignored
+    - spec/fixtures/project_info.rb     # one-time test fixture creator
+    - spec/helpers/database_helper.rb   # test helper file not considered
+    - spec/helpers/vcr_helper.rb        # test helper file not considered
+    - repostore/                        # code files cloned by CodePraise
