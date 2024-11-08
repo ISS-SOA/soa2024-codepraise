@@ -4,13 +4,14 @@ source 'https://rubygems.org'
 ruby File.read('.ruby-version').strip
 
 # Configuration and Utilities
-gem 'figaro', '~> 1.0'
+gem 'figaro', '~> 1.2'
 gem 'pry'
-gem 'rake'
+gem 'rake', '~> 13.0'
 
 # Web Application
 gem 'logger', '~> 1.6'
 gem 'puma', '~> 6.4'
+gem 'rack-session', '~> 0.3'
 gem 'roda', '~> 3.85'
 gem 'slim', '~> 5.2'
 
@@ -31,7 +32,7 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg'
+  gem 'pg', '~> 1.2'
 end
 
 # Testing
@@ -41,6 +42,10 @@ group :test do
   gem 'simplecov', '~> 0'
   gem 'vcr', '~> 6'
   gem 'webmock', '~> 3'
+
+  gem 'headless', '~> 2.3'
+  gem 'selenium-webdriver', '~> 4.11'
+  gem 'watir', '~> 7.0'
 end
 
 # Development

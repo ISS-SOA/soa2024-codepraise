@@ -35,6 +35,9 @@ Layout/HashAlignment:
   Enabled: true
   EnforcedHashRocketStyle: table
 
+Naming/RescuedExceptionsVariableName:
+  Enabled: false
+
 Style/HashSyntax:
   Enabled: true
   Exclude:

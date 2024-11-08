@@ -33,14 +33,6 @@ module CodePraise
 
       def summarize_line_reports(line_reports)
         line_reports.map.with_index do |report, index|
-          # code_str = BlameCodeString.new(report['code']).strip_leading_tab
-
-          # Entity::LineContribution.new(
-          #   contributor: BlameContributor.new(report).to_entity,
-          #   code: file_path.language.new(code_str),
-          #   time: Time.at(report['author-time'].to_i),
-          #   number: line_index + 1 # line numbers are one more than index count
-          # )
           LineContribution.new(report, index, file_path.language).to_entity
         end
       end
@@ -54,15 +46,14 @@ module CodePraise
         @language = language
       end
 
-      def to_entity
-        code_str = BlameCodeString.new(@line_report['code']).strip_leading_tab
+      def contributor = BlameContributor.new(@line_report).to_entity
+      def code_str = BlameCodeString.new(@line_report['code']).strip_leading_tab
+      def code = @language.new(code_str)
+      def time = Time.at(@line_report['author-time'].to_i)
+      def number = @line_index + 1
 
-        Entity::LineContribution.new(
-          contributor: BlameContributor.new(@line_report).to_entity,
-          code: @language.new(code_str),
-          time: Time.at(@line_report['author-time'].to_i),
-          number: @line_index + 1 # line numbers are one more than index count
-        )
+      def to_entity
+        Entity::LineContribution.new(contributor:, code:, time:, number:)
       end
     end
 

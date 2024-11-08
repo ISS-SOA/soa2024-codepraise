@@ -11,7 +11,7 @@ module CodePraise
     class Project < Dry::Struct
       include Dry.Types
 
-      MAX_SIZE_KB = 10000
+      MAX_SIZE_KB = 10_000
 
       attribute :id,            Integer.optional
       attribute :origin_id,     Strict::Integer
