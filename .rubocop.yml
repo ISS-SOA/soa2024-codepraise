@@ -48,6 +48,3 @@ Style/SymbolArray:
   Exclude:
     - Rakefile
     - app/infrastructure/database/migrations/*.rb
-
-Naming/RescuedExceptionsVariableName:
-  Enabled: false

@@ -9,7 +9,7 @@ module CodePraise
       attr_reader :path, :files, :base_files, :subfolders
 
       def initialize(path:, files:)
-        super(Types::HashedArrays.new)
+        super(Types::AutoArrayHash.new)
 
         @path = path
         @files = files
@@ -51,7 +51,7 @@ module CodePraise
 
       def subfolder_files
         nested_files
-          .each_with_object(Types::HashedArrays.new) do |nested, lookup|
+          .each_with_object(Types::AutoArrayHash.new) do |nested, lookup|
             subfolder = nested.file_path.folder_after(folder_path)
             lookup[subfolder] << nested
           end

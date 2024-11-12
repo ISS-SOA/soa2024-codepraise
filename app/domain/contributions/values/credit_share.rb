@@ -6,7 +6,7 @@ module CodePraise
     class CreditShare < SimpleDelegator
       # rubocop:disable Style/RedundantSelf
       def initialize
-        super(Types::HashedIntegers.new)
+        super(Types::AutoZeroHash.new)
       end
 
       def add_credit(line)

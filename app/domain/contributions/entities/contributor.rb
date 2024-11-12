@@ -14,12 +14,13 @@ module CodePraise
 
       # Email address defines uniqueness
       def ==(other)
-        email == other.email
+        (email == other.email) || (username == other.username)
       end
 
       # Redefine hashing (hash uses eql?)
       alias eql? ==
 
+      # Favor email for unique identifier (hash key)
       def hash
         email.hash
       end
