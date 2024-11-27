@@ -36,8 +36,15 @@ module Views
                             @folder.total_credits)
     end
 
+    # Returns the number of lines contributed by contributor displayed on view
     def num_lines_by(contributor_view)
-      @folder.credit_share.share[contributor_view.entity.username]
+      contributor = contributors.find do |c|
+        (c.email == contributor_view.email) || (c.username == contributor_view.username)
+      end
+
+      return 0 if contributor.nil?
+
+      @folder.credit_share.share[contributor.username]
     end
 
     def owner_name
