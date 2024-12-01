@@ -4,7 +4,6 @@ require 'rack' # for Rack::MethodOverride
 require 'roda'
 require 'slim'
 require 'slim/include'
-
 require_relative 'helpers'
 
 module CodePraise
@@ -15,6 +14,7 @@ module CodePraise
     plugin :halt
     plugin :flash
     plugin :all_verbs # allows DELETE and other HTTP verbs beyond GET/POST
+    plugin :caching
     plugin :render, engine: 'slim', views: 'app/presentation/views_html'
     plugin :public, root: 'app/presentation/public'
     plugin :assets, path: 'app/presentation/assets',
@@ -42,7 +42,7 @@ module CodePraise
           flash[:error] = result.failure
           viewable_projects = []
         else
-          projects = result.value!
+          projects = result.value!.projects
           flash.now[:notice] = MSG_GET_STARTED if projects.none?
 
           session[:watching] = projects.map(&:fullname)
@@ -102,6 +102,11 @@ module CodePraise
             proj_folder = Views::ProjectFolderContributions.new(
               appraised[:project], appraised[:folder]
             )
+
+            # Only use browser caching in production
+            App.configure :production do
+              response.expires 60, public: true
+            end
 
             view 'project', locals: { proj_folder: }
           end

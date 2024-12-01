@@ -9,12 +9,7 @@ require 'yaml'
 
 require 'minitest/autorun'
 require 'minitest/rg'
-require 'vcr'
-require 'webmock'
-
-require_relative '../init'
 
 USERNAME = 'soumyaray'
 PROJECT_NAME = 'YPBT-app'
-GITHUB_TOKEN = CodePraise::App.config.GITHUB_TOKEN
 CORRECT = YAML.safe_load_file('spec/fixtures/github_results.yml')

@@ -23,36 +23,21 @@ gem 'dry-monads', '~> 1.4'
 gem 'dry-transaction', '~> 0.13'
 gem 'dry-validation', '~> 1.7'
 
-# DOMAIN LAYER
-# Validation
-gem 'dry-struct', '~> 1.0'
-gem 'dry-types', '~> 1.0'
+# Representers
+gem 'ostruct', '~> 0.0'
+gem 'multi_json', '~> 1.00'
+gem 'roar', '~> 1.0'
 
 # INFRASTRUCTURE LAYER
 # Networking
 gem 'http', '~> 5.0'
 
-# Database
-gem 'hirb'
-# gem 'hirb-unicode' # incompatible with new rubocop
-gem 'sequel', '~> 5.0'
-
-group :development, :test do
-  gem 'sqlite3', '~> 1.0'
-end
-
-group :production do
-  gem 'pg', '~> 1.2'
-end
-
 # TESTING
 group :test do
   # Unit/Integration/Acceptance Tests
-  gem 'minitest', '~> 5.20'
-  gem 'minitest-rg', '~> 5.2'
-  gem 'simplecov', '~> 0'
-  gem 'vcr', '~> 6'
-  gem 'webmock', '~> 3'
+  gem 'minitest', '~> 5.0'
+  gem 'minitest-rg', '~> 5.0'
+  gem 'simplecov', '~> 0.0'
 
   # Acceptance Tests
   gem 'headless', '~> 2.0'
@@ -69,5 +54,4 @@ group :development do
   gem 'rubocop'
   gem 'rubocop-minitest'
   gem 'rubocop-rake'
-  gem 'rubocop-sequel'
 end

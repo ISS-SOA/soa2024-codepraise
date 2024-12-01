@@ -15,6 +15,10 @@ module Views
       @contributor.username
     end
 
+    def email
+      @contributor.email
+    end
+
     def github_profile_url
       "https://github.com/#{@contributor.username}"
     end

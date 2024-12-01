@@ -22,19 +22,29 @@ module Views
     end
 
     def full_path
-      "/project/#{@project.owner_name}/#{project_name}/#{@folder.path}"
+      PathPresenter.to_folder(
+        @project.owner_name, project_name, @folder.path
+      )
     end
 
     def rel_path
-      @folder.path
+      PathPresenter.path_leaf(@folder.path)
     end
 
     def percent_credit_of(contributor_view)
-      @folder.percent_credit_of(contributor_view.entity)
+      PercentPresenter.call(num_lines_by(contributor_view),
+                            @folder.total_credits)
     end
 
+    # Returns the number of lines contributed by contributor displayed on view
     def num_lines_by(contributor_view)
-      @folder.lines_by(contributor_view.entity).count
+      contributor = contributors.find do |c|
+        (c.email == contributor_view.email) || (c.username == contributor_view.username)
+      end
+
+      return 0 if contributor.nil?
+
+      @folder.credit_share.share[contributor.username]
     end
 
     def owner_name

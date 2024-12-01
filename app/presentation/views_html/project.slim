@@ -35,8 +35,10 @@
         tr.contributions.table_header
           td
             span.contributions.table_header Folders
-          - (proj_folder.contributors.count).times do
-            td
+          - proj_folder.contributors.each do |contributor|
+            td.contribution
+              span #{proj_folder.num_lines_by(contributor)}
+
         - proj_folder.subfolders.each do |subfolder|
           tr id='folder_row'
             td.folder.name id='folder.name'
@@ -55,7 +57,6 @@
           span.contributions.table_header Files
         - proj_folder.contributors.each do |contributor|
           td.contribution
-            span #{proj_folder.num_lines_by(contributor)}
       - proj_folder.files.each do |file|
         tr id='file_row'
           td.file.name
