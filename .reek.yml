@@ -4,3 +4,6 @@
       enabled: false
   exclude_paths:
     - _snippets                         # demo files ignored
+    - spec/fixtures/project_info.rb     # one-time test fixture creator
+    - spec/helpers/database_helper.rb   # test helper file not considered
+    - spec/helpers/vcr_helper.rb        # test helper file not considered
