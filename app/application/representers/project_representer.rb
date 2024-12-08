@@ -25,10 +25,14 @@ module CodePraise
       collection :contributors, extend: Representer::Member, class: OpenStruct
 
       link :self do
-        "#{App.config.API_HOST}/projects/#{project_name}/#{owner_name}"
+        "#{api_host_url}/api/v1/projects/#{project_name}/#{owner_name}"
       end
 
       private
+
+      def api_host_url
+        ENV.fetch('API_HOST', nil)
+      end
 
       def project_name
         represented.name
